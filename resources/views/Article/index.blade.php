@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title', 'GradJobs')
+@section('title', 'Article | GradJobs')
 
 @section('content')
     <!-- <form action="/articlePost" method="post"> -->
@@ -27,7 +27,7 @@
                         <div class="card-footer">
                             <p class="card-text">Lokasi : {{ $article->id }}</p>
                         </div>
-                        <a href="view/{{ $article->id }}" class="stretched-link"></a>
+                        <a href="/article/{{ $article->id }}" class="stretched-link"></a>
                     </div>
                 </div>
             @endforeach

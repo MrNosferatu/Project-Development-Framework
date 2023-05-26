@@ -23,8 +23,9 @@
                     <div class="card">
                         <h5 class="card-header">{{ $vacancy->title }}</h5>
                         <div class="card-body">
-                            <p class="card-text">{{ $vacancy->description }}</p>
                             <p class="card-text">{{ $vacancy->type }}</p>
+                            <p class="card-text">Rp. {{ $vacancy->salary }}</p>
+
                         </div>
                         <div class="card-footer">
                             <p class="card-text">Lokasi : {{ $vacancy->location }}</p>

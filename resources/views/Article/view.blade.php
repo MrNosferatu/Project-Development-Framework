@@ -1,12 +1,9 @@
 @extends('layouts.main')
-@section('title', 'View Vacancy')
+@foreach ($article as $article)
+    @section('title', $article->title)
 
-@section('content')
-    <div style="width:70vw" class="mx-auto">
-
-    </div>
-    <div style="width:70vw" class="mx-auto">
-        @foreach ($vacancy as $vacancy)
+    @section('content')
+        <div style="width:70vw" class="mx-auto">
             <div class="card">
                 <div class="card-header">
                     <!-- Button trigger modal -->
@@ -24,33 +21,25 @@
                                         aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    Apakah anda yakin ingin menghapus lowongan "{{ $vacancy->title }}"?
+                                Apakah anda yakin ingin menghapus artikel "{{$article->title}}"?
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                    <a href="/vacancy/delete/{{ $vacancy->id }}" class="btn btn-danger">Delete</a>
+                                    <a href="/article/delete/{{ $article->id }}" class="btn btn-danger">Delete</a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <a href="/vacancy/edit/{{ $vacancy->id }}" class="btn btn-warning">edit</a>
+                    <a href="/article/edit/{{ $article->id }}" class="btn btn-warning">edit</a>
                 </div>
                 <div class="card-body">
-                    <p class="card-text">{{ $vacancy->title }}</p>
-                    <p class="card-text">Lokasi : {{ $vacancy->location }}</p>
-                    <p class="card-text">Jenis :</br>{{ $vacancy->type }}</p>
-                    <p class="card-text">Deskripsi pekerjaan </br>{{ $vacancy->description }}</p>
-                    <p class="card-text">Kualifikasi : </br>{{ $vacancy->qualification }}</p>
-                    <p class="card-text">Gaji : {{ $vacancy->salary }}</p>
-
-                </div>
-                <div class="card-footer">
-                    <a href="#" class="btn btn-primary">Apply</a>
+                    <p class="card-text">{{ $article->title }}</p>
+                    <p class="card-text">{{ $article->description }}</p>
                 </div>
             </div>
-        @endforeach
+        </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
         </script>
-    </div>
+    @endforeach
 @stop

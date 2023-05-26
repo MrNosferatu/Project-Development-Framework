@@ -2,7 +2,8 @@
 @section('title', 'GradJobs')
 
 @section('content')
-    <form action="/articlePost" method="post">
+    <form action="" method="post">
+        @method('put')
         @csrf
         <div class="mb-3">
             <label for="title" class="form-label">Title</label>
