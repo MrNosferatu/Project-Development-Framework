@@ -2,9 +2,9 @@
 @section('title', 'GradJobs')
 
 @section('content')
-    <form action="/search" method="post">
+    <form id="search-form">
         @csrf
-        <div class="input-group mb-3 mx-auto" style="width:40vw">
+        <div class="input-group mb-3 mx-auto">
             <input type="text" class="form-control" aria-label="Text input with dropdown button" name="query">
             <select class="form-select" aria-label="Default select example" name="type">
                 <option value="any" selected>Jenis</option>

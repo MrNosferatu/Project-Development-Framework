@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('Vacancy', function (Blueprint $table) {
             $table->id()->autoIncrement();
             $table->timestamps('created_at');
-            $table->string('tittle');
+            $table->string('title');
             $table->string('description')->nullable();
             $table->string('type')->nullable();
             $table->string('qualification')->nullable();

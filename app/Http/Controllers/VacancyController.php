@@ -10,8 +10,10 @@ class VacancyController extends Controller
 {
     public function index()
     {
-        $vacancy = DB::select('select * from vacancy');
+        // $vacancy = DB::select('select * from vacancy');
  
+        $vacancy = Vacancy::take(1)
+        ->get();
         return view('home', ['vacancy' => $vacancy]);
     }
     public function store(Request $request)
@@ -76,7 +78,8 @@ class VacancyController extends Controller
             ->where('type', $type)
             ->get();
         };
- 
-        return view('search', ['vacancy' => $vacancy]);
+        return response()->json($vacancy);
+
     }
+    
 }

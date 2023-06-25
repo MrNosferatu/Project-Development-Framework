@@ -2,7 +2,7 @@
 @section('title', 'Search')
 
 @section('content')
-    <form action="/search" method="post">
+    <form action="/search" method="post"  id="search-form">
         @csrf
         <div class="input-group mb-3 mx-auto">
             <input type="text" class="form-control" aria-label="Text input with dropdown button" name="query">
