@@ -10,11 +10,8 @@ class VacancyController extends Controller
 {
     public function index()
     {
-        // $vacancy = DB::select('select * from vacancy');
- 
-        $vacancy = Vacancy::take(1)
-        ->get();
-        return view('home', ['vacancy' => $vacancy]);
+        $vacancy = Vacancy::paginate(20);
+        return view('Vacancy/index', ['vacancies' => $vacancy]);
     }
     public function store(Request $request)
     {

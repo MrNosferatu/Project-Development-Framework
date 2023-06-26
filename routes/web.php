@@ -13,15 +13,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [App\Http\Controllers\VacancyController::class, 'index']);
-Route::get('/vacancy/create', function () {
-    return view('Vacancy/input');
+Route::get('/', function () {
+    return view('home');
 });
-Route::put('/vacancy/create', [App\Http\Controllers\VacancyController::class, 'store']);
-Route::get('/vacancy/{id}', [App\Http\Controllers\VacancyController::class, 'view']);
-Route::get('/vacancy/edit/{id}', [App\Http\Controllers\VacancyController::class, 'edit']);
-Route::patch('/vacancy/edit/{id}', [App\Http\Controllers\VacancyController::class, 'update']);
-Route::get('/vacancy/delete/{id}', [App\Http\Controllers\VacancyController::class, 'delete']);
+// Route::get('/vacancy/create', function () {
+//     return view('Vacancy/input');
+// });
+// Route::put('/vacancy/create', [App\Http\Controllers\VacancyController::class, 'store']);
+// Route::get('/vacancy/{id}', [App\Http\Controllers\VacancyController::class, 'view']);
+// Route::get('/vacancy/edit/{id}', [App\Http\Controllers\VacancyController::class, 'edit']);
+// Route::patch('/vacancy/edit/{id}', [App\Http\Controllers\VacancyController::class, 'update']);
+// Route::get('/vacancy/delete/{id}', [App\Http\Controllers\VacancyController::class, 'delete']);
 // Route::post('/search', [App\Http\Controllers\VacancyController::class, 'search']);
 
 Route::post('/search', [App\Http\Controllers\VacancyController::class, 'search'])->name('search');
@@ -36,3 +38,14 @@ Route::get('/article/edit/{id}', [App\Http\Controllers\ArticleController::class,
 Route::patch('/article/edit/{id}', [App\Http\Controllers\ArticleController::class, 'update']);
 Route::get('/article/delete/{id}', [App\Http\Controllers\ArticleController::class, 'delete']);
 route::get('/login', [App\Http\Controllers\UserController::class, 'index']);
+
+
+Route::get('/vacancy', [App\Http\Controllers\VacancyController::class, 'index']);
+Route::get('/vacancy/create', function () {
+    return view('Vacancy/input');
+});
+Route::put('/vacancy/create', [App\Http\Controllers\VacancyController::class, 'store']);
+Route::get('/vacancy/{id}', [App\Http\Controllers\VacancyController::class, 'view']);
+Route::get('/vacancy/edit/{id}', [App\Http\Controllers\VacancyController::class, 'edit']);
+Route::patch('/vacancy/edit/{id}', [App\Http\Controllers\VacancyController::class, 'update']);
+Route::get('/vacancy/delete/{id}', [App\Http\Controllers\VacancyController::class, 'delete']);

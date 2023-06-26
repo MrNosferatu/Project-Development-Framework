@@ -18,7 +18,7 @@
     </form>
     <div class="mx-auto">
         <div class="row">
-            @foreach ($vacancy as $vacancy)
+            @foreach ($vacancies as $vacancy)
             <div class="col-6 p-2">
                     <div class="card">
                         <h5 class="card-header">{{ $vacancy->title }}</h5>

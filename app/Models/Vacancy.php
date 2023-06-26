@@ -10,5 +10,12 @@ class Vacancy extends Model
     use HasFactory;
     protected $table = 'Vacancy';
     protected $primaryKey = 'id';
-    
+    protected $fillable = [
+        'title',
+        'description',
+        'qualification',
+        'location',
+        'type',
+        'salary',
+    ];
 }
