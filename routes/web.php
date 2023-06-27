@@ -38,7 +38,11 @@ Route::get('/article/edit/{id}', [App\Http\Controllers\ArticleController::class,
 Route::patch('/article/edit/{id}', [App\Http\Controllers\ArticleController::class, 'update']);
 Route::get('/article/delete/{id}', [App\Http\Controllers\ArticleController::class, 'delete']);
 route::get('/login', [App\Http\Controllers\UserController::class, 'index']);
-
+Route::get('/register', function () {
+    return view('User/register');
+});
+route::put('/user/register', [App\Http\Controllers\UserController::class, 'store']);
+route::post('/user/login', [App\Http\Controllers\UserController::class, 'login']);
 
 Route::get('/vacancy', [App\Http\Controllers\VacancyController::class, 'index']);
 Route::get('/vacancy/create', function () {

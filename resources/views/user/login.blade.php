@@ -1,17 +1,42 @@
-@extends('layouts.main')
-@section('title', 'GradJobs')
-
+@extends('user.layouts')
+@section('title', 'Login')
 @section('content')
-<form class="p-4 p-md-5 border rounded-3 bg-light">
-  <h2 class="mb-4">Login</h2>
-  <div class="mb-3">
-    <label for="email" class="form-label">Email</label>
-    <input type="email" class="form-control" id="email" name="email" required>
-  </div>
-  <div class="mb-3">
-    <label for="password" class="form-label">Password</label>
-    <input type="password" class="form-control" id="password" name="password" required>
-  </div>
-  <button type="submit" class="btn btn-primary">Login</button>
-</form>
+<div class="d-flex justify-content-center align-items-center vh-100">
+        <div class="card mx-auto mt-5" style="max-width: 500px;">
+            <div class="card-header bg-white text-center">
+                <h2 class="card-title">Login</h2>
+                @if (session('logged_in'))
+    <div class="alert alert-danger">
+        {{ session('logged_in') }}
+    </div>
+@endif
+            </div>
+            <div class="card-body">
+                <form method="POST" action="/user/login" class="row g-3 mx-auto">
+                    @csrf
+                    @method('POST')
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" name="email" id="email" value="{{ old('email') }}"
+                            class="form-control @error('email') is-invalid @enderror" required autofocus>
+                        @error('email')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" name="password" id="password" value="{{ old('password') }}"
+                            class="form-control @error('password') is-invalid @enderror" required>
+                        @error('password')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div>
+                        <button type="submit" class="btn btn-success">Register</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 @stop
