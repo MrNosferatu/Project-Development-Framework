@@ -21,6 +21,9 @@ class UserModel extends Model implements AuthenticatableContract
         'pendidikan',
         'tempat_lahir',
         'tanggal_lahir',
+        'user_type',
+        'photo_profile',
+        'cv'
     ];
 
     public function getAuthIdentifierName()

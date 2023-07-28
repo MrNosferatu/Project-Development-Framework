@@ -2,55 +2,60 @@
 @section('title', 'View Vacancy')
 
 @section('content')
-    <div style="width:70vw" class="mx-auto">
-
-    </div>
-    <div style="width:70vw" class="mx-auto">
-        @foreach ($vacancy as $vacancy)
-            <div class="card">
-                <div class="card-header">
-                    <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmation">
-                        Delete
-                    </button>
-                    <!-- Modal -->
-                    <div class="modal fade" id="confirmation" tabindex="-1" aria-labelledby="exampleModalLabel"
-                        aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Konfirmasi</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    Apakah anda yakin ingin menghapus lowongan "{{ $vacancy->title }}"?
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                    <a href="/vacancy/delete/{{ $vacancy->id }}" class="btn btn-danger">Delete</a>
-                                </div>
-                            </div>
-                        </div>
+    <div style="width:70vw;" class="mx-auto">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-text">{{ $vacancy->title }}</h4>
+            </div>
+            <div class="card-body">
+                <p class="card-text">Lokasi : {{ $vacancy->location }}</p>
+                <p class="card-text">Jenis :</br>{{ $vacancy->type }}</p>
+                <p class="card-text">Deskripsi pekerjaan </br>{{ $vacancy->description }}</p>
+                <p class="card-text">Gaji : {{ $vacancy->salary }}</p>
+            </div>
+            <div class="card-footer">
+                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#confirmation">
+                    Apply
+                </button>
+            </div>
+        </div>
+        <br>
+        <div class="card">
+            <div class="card-header">
+                <h5>Informasi Perusahaan</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col col-1">
+                        <img src="{{ asset('images/' . $company->image) }}" class="card-img-top" alt="...">
                     </div>
-                    <a href="/vacancy/edit/{{ $vacancy->id }}" class="btn btn-warning">edit</a>
-                </div>
-                <div class="card-body">
-                    <p class="card-text">{{ $vacancy->title }}</p>
-                    <p class="card-text">Lokasi : {{ $vacancy->location }}</p>
-                    <p class="card-text">Jenis :</br>{{ $vacancy->type }}</p>
-                    <p class="card-text">Deskripsi pekerjaan </br>{{ $vacancy->description }}</p>
-                    <p class="card-text">Kualifikasi : </br>{{ $vacancy->qualification }}</p>
-                    <p class="card-text">Gaji : {{ $vacancy->salary }}</p>
-
-                </div>
-                <div class="card-footer">
-                    <a href="#" class="btn btn-primary">Apply</a>
+                    <div class="col">
+                        <h6 class="card-text">{{ $company->nama_badan_usaha }}</h6>
+                        <p class="card-text">{{ $company->alamat }}</p>
+                    </div>
                 </div>
             </div>
-        @endforeach
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
-        </script>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="confirmation" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form action="/vacancy/{{ $vacancy->id }}/apply" method="post">
+                        @csrf
+                        @method('POST')
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">confirmation</h5>
+                        </div>
+                        <div class="modal-body">
+                            <p>Apply for {{ $vacancy->title }}?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-success">Yes</button>
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">No</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 @stop

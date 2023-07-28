@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('Vacancy', function (Blueprint $table) {
             $table->id()->autoIncrement();
+            $table->foreignId('company_id')->constrained('companies')->onDelete('cascade');
             $table->timestamps('created_at');
             $table->string('title');
             $table->string('description')->nullable();

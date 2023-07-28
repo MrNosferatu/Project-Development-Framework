@@ -1,3 +1,6 @@
+<?php
+use Illuminate\Support\Facades\Auth;
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,9 +10,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    </script> -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
     <title>@yield('title')</title>
 </head>
 
@@ -23,7 +30,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav m-auto">
-                <li class="nav-item mx-3">
+                    <li class="nav-item mx-3">
                         <a class="nav-link" aria-current="page" href="/">Home</a>
                     </li>
                     <li class="nav-item mx-3">
@@ -32,7 +39,7 @@
                     <li class="nav-item mx-3">
                         <a class="nav-link" href="/article">Article</a>
                     </li>
-                    <li class="nav-item dropdown">
+                    <!-- <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
                             Devs
@@ -41,12 +48,45 @@
                             <li><a class="dropdown-item" href="/vacancy/create">Post Vacancy</a></li>
                             <li><a class="dropdown-item" href="/article/write">Post Article</a></li>
                         </ul>
-                    </li>
+                    </li> -->
                 </ul>
+                @if (session('logged_in'))
+                    <div class="dropdown">
+                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            {{ session('user')->name }}
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <li><a class="dropdown-item" href="/profile">Profile</a></li>
+                            @if (session('user')->user_type == 'perusahaan')
+                                <li><a class="dropdown-item" href="/companies/{{ session('company_id') }}">Companies
+                                        Profile</a></li>
+                                <li><a class="dropdown-item" href="/companies/vacancy">Vacancy</a></li>
+                            @endif
+                            @if (session('user')->user_type == 'user')
+                                <li><a class="dropdown-item" href="/user/lamaran">Lamaran</a></li>
+                            @endif
+                            <li>
+                                <form action="{{ route('logout') }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="dropdown-item">Logout</button>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                @else
+                    <a href="/login" class="btn btn-primary mx-3">Login</a>
+                    <a href="/register" class="btn btn-primary mx-3">Register</a>
+                @endif
+
             </div>
         </div>
     </nav>
-
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
     <div class="container p-5">
         @yield('content')
     </div>
@@ -97,7 +137,6 @@
             </div>
         </footer>
     </section>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         const searchForm = document.getElementById('search-form');
         const searchResults = document.querySelector('.row');
@@ -138,7 +177,6 @@
             xhr.send(formData);
         });
     </script>
-
 </body>
 
 </html>

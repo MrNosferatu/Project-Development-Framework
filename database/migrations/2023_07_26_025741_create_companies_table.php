@@ -11,18 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('companies', function (Blueprint $table) {
             $table->id()->autoIncrement();
-            $table->string('user_type');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->string('name');
-            $table->string('email')->unique();
-            $table->string('password');
+            $table->string('nama_badan_usaha');
             $table->string('no_telp');
-            $table->string('pendidikan');
-            $table->string('tempat_lahir');
-            $table->string('tanggal_lahir');
-            $table->datetimes('last_login_at');
-            $table->rememberToken();
+            $table->string('alamat');
+            $table->string('npwp');
+            $table->string('nama_pemilik');
+            $table->string('image')->nullable();
+            $table->timestamps();
         });
     }
 
@@ -31,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('companies');
     }
 };

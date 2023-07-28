@@ -1,15 +1,26 @@
 @extends('user.layouts')
 @section('title', 'Register')
 @section('content')
-<div class="d-flex justify-content-center align-items-center vh-100">
+    <div class="d-flex justify-content-center align-items-center vh-100">
         <div class="card mx-auto mt-5" style="max-width: 500px;">
             <div class="card-header bg-white text-center">
                 <h2 class="card-title">Register</h2>
             </div>
             <div class="card-body pt-5">
-                <form method="POST" action="/user/register" class="row g-3 mx-auto">
+                <form method="POST" action="/user" class="row g-3 mx-auto" enctype="multipart/form-data">
                     @csrf
-                    @method('PUT')
+                    @method('POST')
+                    <div class="mb-1 mt-0">
+                        <label for="user_type" class="form-label">User Type</label>
+                        <select name="user_type" id="user_type" class="form-control" required>
+                            <option value="">-- Select User Type --</option>
+                            <option value="user">User</option>
+                            <option value="perusahaan">perusahaan</option>
+                        </select>
+                        @error('user_type')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
                     <div class="mb-1 mt-0">
                         <label for="name" class="form-label">Name</label>
                         <input type="text" name="name" id="name" value="{{ old('name') }}"
@@ -18,7 +29,14 @@
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
-
+                    <!-- <div class="mb-1 mt-0">
+                        <p for="photo_profile" class="form-label">Photo Profile</p>
+                        <input type="file" name="photo_profile" id="photo_profile" accept="image/*"
+                            onchange="validateImageSize(this)" class="form-control" required>
+                        @error('photo_profile')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div> -->
                     <div class="mb-1 mt-0">
                         <label for="email" class="form-label">Email</label>
                         <input type="email" name="email" id="email" value="{{ old('email') }}"
@@ -51,15 +69,6 @@
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
-
-                    <div class="mb-1 mt-0">
-                        <label for="tempat_lahir" class="form-label">Tempat Lahir</label>
-                        <input type="text" name="tempat_lahir" id="tempat_lahir" value="{{ old('tempat_lahir') }}"
-                            class="form-control" required>
-                        @error('tempat_lahir')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
                     <div class="mb-1 mt-0">
                         <label for="tanggal_lahir" class="form-label">Tanggal Lahir</label>
                         <input type="date" name="tanggal_lahir" id="tanggal_lahir" class="form-control"
@@ -68,12 +77,50 @@
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
-
+                    <div class="mb-1 mt-0" id="cvBlock" style="display: none;">
+                        <p for="cv" class="form-label">CV</p>
+                        <input type="file" name="cv" id="cv" class="form-control">
+                        @error('cv')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
                     <div>
                         <button type="submit" class="btn btn-success">Register</button>
+                        <a class="btn btn-light" href="/login">Login</a>
                     </div>
                 </form>
+                <script>
+    var cvInput = document.getElementById('cvBlock');
+    var userTypeSelect = document.getElementById('user_type');
+
+    userTypeSelect.addEventListener('change', function() {
+        if (userTypeSelect.value === 'user') {
+            cvInput.style.display = 'block';
+        } else {
+            cvInput.style.display = 'none';
+        }
+    });
+</script>
             </div>
         </div>
     </div>
 @endsection
+<script>
+    function validateImageSize(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                var img = new Image();
+                img.onload = function() {
+                    if (img.width != 400 || img.height != 400) {
+                        input.setCustomValidity('Image must be 400x400.');
+                    } else {
+                        input.setCustomValidity('');
+                    }
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>

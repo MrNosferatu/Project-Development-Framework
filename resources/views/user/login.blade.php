@@ -5,11 +5,6 @@
         <div class="card mx-auto mt-5" style="max-width: 500px;">
             <div class="card-header bg-white text-center">
                 <h2 class="card-title">Login</h2>
-                @if (session('logged_in'))
-    <div class="alert alert-danger">
-        {{ session('logged_in') }}
-    </div>
-@endif
             </div>
             <div class="card-body">
                 <form method="POST" action="/user/login" class="row g-3 mx-auto">
@@ -33,7 +28,8 @@
                         @enderror
                     </div>
                     <div>
-                        <button type="submit" class="btn btn-success">Register</button>
+                        <button type="submit" class="btn btn-success">Login</button>
+                        <a class="btn btn-light" href="/register">Signup</a>
                     </div>
                 </form>
             </div>

@@ -11,11 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('Article', function (Blueprint $table) {
-            $table->id()->autoIncrement();
-            $table->timestamps('created_at');
-            $table->string('title');
-            $table->string('description')->nullable();
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('tempat_lahir');
         });
     }
 
@@ -24,6 +21,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('Article');
+        //
     }
 };
